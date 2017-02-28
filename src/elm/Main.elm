@@ -1,6 +1,8 @@
 module Main exposing (..)
 
+import Date exposing (fromTime)
 import Html
+import Time
 
 import Model  exposing (..)
 import View   exposing (..)
@@ -16,9 +18,9 @@ main =
 
 init : (Model, Cmd Msg)
 init =
-  0
+  mockedModel (fromTime 1)
     ! []
 
 subscriptions : Model -> Sub Msg
-subscriptions _ = 
-  Sub.none
+subscriptions model = 
+  Time.every Time.second UpdateDate

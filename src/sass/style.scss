@@ -6,6 +6,13 @@
 @include foundation-flex-classes;
 @include foundation-flex-grid;
 
+// Logo fonts
+@import url('https://fonts.googleapis.com/css?family=Bungee+Shade|Source+Sans+Pro:400,700|Vampiro+One');
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
 .main {
   background: red;
 }
@@ -32,6 +39,13 @@
   }
 }
 
+.tactic .card-divider {
+  padding: 0.5rem;
+  &.heading {
+    font-weight: bold;
+  }
+}
+
 @mixin avatar($gender, $number) {
   background-image: url('images/avatars/' + $gender + $number + '.png');
   background-size: contain;
@@ -53,4 +67,101 @@
 
 .label {
   margin-right: 0.5em;
+}
+
+#body-container {
+  margin-top: 1em;
+}
+
+#header-container {
+  background-image: url('images/header-texture.png');
+}
+
+@mixin logo-font() {
+  font-family: 'Bungee Shade', cursive; //'Vampiro One', cursive;
+  color: yellow;
+}
+
+@mixin logo-secondary-font() {
+  font-family: 'Vampiro One', cursive; //'Monoton', cursive;
+}
+
+#main-logo {
+  display: table;
+  width: 26rem;
+  height: 12rem;
+  margin: 0 auto;
+
+  .logo-the {
+    @include logo-secondary-font;
+    transform: rotate(-20deg);
+    font-size: 5rem;
+    top: 1.5rem;
+    margin-left: -5rem;
+    display: table-row;
+    color: white;
+  }
+
+  .logo-agile-informer {
+    @include logo-font;
+    font-size: 5rem;
+    margin-top: -4.5rem;
+    margin-left: -1rem;
+    display: table-row;
+    line-height: 5.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+#sidebar {
+  background-image: url('images/header-texture.png');
+  color: white;
+  height: 100%;
+  padding-bottom: 10rem;
+}
+
+.goal {
+  padding-bottom: 1rem;
+  color: yellow;
+
+  h4 {
+    @include logo-font;
+  }
+}
+
+.strategy {
+  padding-bottom: 0.5rem;
+
+  h5 {
+    @include logo-secondary-font;
+    transform: rotate(-10deg);
+    padding-bottom: 0.5rem;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 0, 0.1);
+    cursor: pointer;
+  }
+
+  &.focused-strategy {
+    color: yellow;
+  }
+}
+
+.mailbox {
+  color: yellow;
+  cursor: pointer;
+  padding-bottom: 1rem;
+}
+
+.tactics-columns {
+  padding-top: 1rem;
+}
+
+.spacer {
+  margin-bottom: 3rem;
+}
+
+.toolbar .button {
+  margin-right: 0.2rem;
 }

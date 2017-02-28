@@ -13,7 +13,11 @@ module.exports = {
         joinTo: "app.js"
       },
       stylesheets: {
-        joinTo: "app.css"
+        joinTo: "app.css",
+        order: {
+          after:
+            ['src/sass/foundation-icons/foundation-icons.css']
+        }
       }
     },
     plugins: {
@@ -22,12 +26,12 @@ module.exports = {
         outputFolder: "public/"
       },
       sass: {
-            options: {
-              includePaths: [
-                'node_modules/foundation-sites/scss',
-                'src/sass'
-              ]
-            }
+        options: {
+          includePaths: [
+            'node_modules/foundation-sites/scss',
+            'src/sass'
+          ]
+        }
       }
     }
   }
