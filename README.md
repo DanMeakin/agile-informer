@@ -1,4 +1,4 @@
-# The Agile Transformer prototype
+# The Agile Informer prototype
 
 This is a basic prototype for demonstration of functionality in one of three
 agile process management software concepts.

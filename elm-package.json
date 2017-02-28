@@ -1,7 +1,7 @@
 {
     "version": "0.1.0",
-    "summary": "The Agile Transformer prototype",
-    "repository": "https://github.com/DanMeakin/agile-transformer.git",
+    "summary": "The Agile Informer prototype",
+    "repository": "https://github.com/DanMeakin/agile-informer.git",
     "license": "MIT",
     "source-directories": [
         ".",
