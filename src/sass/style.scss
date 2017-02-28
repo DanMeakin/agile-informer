@@ -1,0 +1,56 @@
+@import 'settings';
+@import 'foundation';
+@include foundation-everything;
+
+// @include foundation-grid;
+@include foundation-flex-classes;
+@include foundation-flex-grid;
+
+.main {
+  background: red;
+}
+
+.card-divider {
+  &.cork {
+    background-image: url('images/cork-wallet.png');
+  }
+
+  &.natural-white {
+    background-image: url('images/ep_naturalwhite.png');
+  }
+
+  &.seigaiha {
+    background-image: url('images/seigaiha.png');
+  }
+
+  &.swirls {
+    background-image: url('images/swirl_pattern.png');
+  }
+
+  &.symphony {
+    background-image: url('images/symphony.png');
+  }
+}
+
+@mixin avatar($gender, $number) {
+  background-image: url('images/avatars/' + $gender + $number + '.png');
+  background-size: contain;
+}
+
+.avatar {
+  height: 4em;
+  width: 4em;
+
+  $gender-list: man woman;
+  @each $gender in $gender-list {
+    @for $i from 1 through 3 {
+      &.#{$gender}-#{$i} {
+        @include avatar($gender, $i);
+      }
+    }
+  }
+}
+
+.label {
+  margin-right: 0.5em;
+}
