@@ -1,0 +1,35 @@
+{
+  "name": "elm-brunch-starter",
+  "version": "0.0.1",
+  "description": "Example of how to build an Elm app with Brunch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "elm package install -y",
+    "start": "brunch watch --server"
+  },
+  "keywords": [
+    "elm",
+    "brunch",
+    "starter",
+    "example",
+    "template"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ivanoats/elm-brunch-starter.git"
+  },
+  "author": "Ivan Storck",
+  "license": "MIT",
+  "devDependencies": {
+    "auto-reload-brunch": "^2.7.1",
+    "brunch": "^2.8.2",
+    "foundation-sites": "^6.3.0",
+    "hmr-brunch": "^0.1.1",
+    "elm-brunch": "^0.7.0",
+    "sass-brunch": "^2.10.4"
+  },
+  "dependencies": {
+    "skeleton-css": "^2.0.4"
+  }
+}
