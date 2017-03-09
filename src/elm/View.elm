@@ -324,7 +324,7 @@ projectCard project =
         
   in
       div [ class "card" ]
-        [ div [ class "card-divider", bg ]
+        [ div [ class "card-divider project-card-header", bg ]
             [ div [ avatarClass project.avatar ] []
             , h4 [] [ text project.name ]
             ] 

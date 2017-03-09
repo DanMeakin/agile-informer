@@ -9378,7 +9378,7 @@ var _DanMeakin$agile_informer$View$projectCard = function (project) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('card-divider'),
+					_0: _elm_lang$html$Html_Attributes$class('card-divider project-card-header'),
 					_1: {
 						ctor: '::',
 						_0: bg,

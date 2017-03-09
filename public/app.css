@@ -4515,6 +4515,11 @@ body {
 #project-cards {
   margin-top: 1em; }
 
+.project-card-header h4 {
+  font-family: 'Share', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase; }
+
 #header-container {
   background-image: url("images/header-texture.png"); }
 

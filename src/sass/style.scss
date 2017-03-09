@@ -9,6 +9,21 @@
 // Logo fonts
 @import url('https://fonts.googleapis.com/css?family=Bungee+Shade|Share:400,700|Source+Sans+Pro:400,700|Vampiro+One');
 
+@mixin logo-font() {
+  font-family: 'Bungee Shade', cursive; //'Vampiro One', cursive;
+  color: yellow;
+}
+
+@mixin logo-secondary-font() {
+  font-family: 'Vampiro One', cursive; //'Monoton', cursive;
+}
+
+@mixin header-font() {
+  font-family: 'Share', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -89,23 +104,12 @@ body {
   margin-top: 1em;
 }
 
+.project-card-header h4 {
+  @include header-font;
+}
+
 #header-container {
   background-image: url('images/header-texture.png');
-}
-
-@mixin logo-font() {
-  font-family: 'Bungee Shade', cursive; //'Vampiro One', cursive;
-  color: yellow;
-}
-
-@mixin logo-secondary-font() {
-  font-family: 'Vampiro One', cursive; //'Monoton', cursive;
-}
-
-@mixin header-font() {
-  font-family: 'Share', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
 }
 
 #main-logo {
