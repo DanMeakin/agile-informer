@@ -4,38 +4,6 @@ import Date exposing (Date, fromTime)
 import Model exposing (..)
 import Time exposing (Time)
 
-{-
-      tacticDescriptions =
-        [ "Do this particular thing."
-        , "Make this happen."
-        , "Work with this individual."
-        , "Another tactic."
-        , "More specific explanation of what we will do here."
-        ]
-
-      tactics =
-        List.map (\n -> { title = "Tactic " ++ toString n
-                        , description = Maybe.withDefault "" 
-                                          <| List.head 
-                                          <| List.drop (rem n 5) tacticDescriptions
-                        , completionDate = if (rem n 12) > 8
-                                             then Nothing
-                                             else Just << fromTime << toFloat <| feb5th + oneDay * 7 * (rem n 10)
-                        , acceptanceCriteria = "Measure against ..." 
-                        , success = case (rem n 10) of
-                                      1 ->
-                                        Just Successful
-
-                                      2 ->
-                                        Just Unsuccessful
-
-                                      _ ->
-                                        Nothing
-                        })
-          <| List.range 1 20
-        
--}
-
 data : Date -> Model
 data date = 
   let projects =
@@ -61,6 +29,8 @@ project1 =
               \started?\n\nThanks,\n\nJens"
           , sender = "Jens Jensen"
           , date   = dayOf2017 30
+          , tags   = [ "TDD"
+                     ]
           }
         , { heading = 
               "How much XP should we do?"
@@ -70,6 +40,9 @@ project1 =
               \don't know what is best. Can you advise? Thanks!"
           , sender = "Lauren Laird"
           , date   = dayOf2017 33
+          , tags   = [ "XP"
+                     , "practice choice"
+                     ]
           }
         , { heading = 
               "PO is useless..."
@@ -79,6 +52,10 @@ project1 =
               \Can you help?"
           , sender = "Jemma Smith"
           , date   = dayOf2017 55
+          , tags   = [ "product owner"
+                     , "backlog"
+                     , "requirements"
+                     ]
           }
         ]
 
@@ -109,9 +86,13 @@ project2 =
               "Problems with requirements"
           , message = 
               "We keep getting requirements from PMs which they want us to \
-              \complete separate from the sprints. I think this is a problem.."
+              \complete separately from the sprints. I think this is a problem.."
           , sender = "Peter Petersen"
           , date   = dayOf2017 45
+          , tags   = [ "requirements"
+                     , "project manager"
+                     , "non-agile"
+                     ]
           }
         ]
 
@@ -143,6 +124,9 @@ project3 =
               "We don't even make software wtf?!?!?!"
           , sender = "Anna Anorak"
           , date   = dayOf2017 41
+          , tags   = [ "XP"
+                     , "culture"
+                     ]
           }
         ]
 
@@ -156,7 +140,7 @@ project3 =
         , longDescription = 
             "Longer description of the full details of the transformation \
             \process..."
-        , avatar     = { gender = Man, num = 1 }
+        , avatar     = { gender = Man, num = 3 }
         , background = Seigaiha
         , status     = [ Activity Concluded ]
         , plan       = projectPlan
@@ -190,6 +174,9 @@ projectPlan =
               "Full training completed by all POs by completion date."
           , completion = 
               Unsuccessful
+          , tags = [ "product owner"
+                   , "training"
+                   ]
           }
         , { title =
               "Discussions with PMs of their roles re requirements"
@@ -202,6 +189,10 @@ projectPlan =
               "PMs not involved in planning product content."
           , completion = 
               Incomplete
+          , tags = [ "project manager"
+                   , "culture"
+                   , "roles"
+                   ]
           }
         , { title =
               "Promote dev-PO contact"
@@ -215,6 +206,11 @@ projectPlan =
               "Lack of complaints about product requirements; clarity"
           , completion =
               Incomplete
+          , tags = [ "product owner"
+                   , "communication"
+                   , "devs"
+                   , "roles"
+                   ]
           }
         , { title =
               "Co-location of POs within teams"
@@ -227,6 +223,9 @@ projectPlan =
               "25% of POs co-located"
           , completion =
               Successful
+          , tags = [ "product owner"
+                   , "co-location"
+                   ]
           }
         , { title =
               "Monitor PO acceptance by teams"
@@ -240,6 +239,10 @@ projectPlan =
               \Scrum teams"
           , completion =
               Incomplete
+          , tags = [ "product owner"
+                   , "teams"
+                   , "expectations"
+                   ]
           }
         ]
 
@@ -257,6 +260,10 @@ projectPlan =
               \levels of test coverage of code developed (90% target)"
           , completion =
               Successful
+          , tags = [ "TDD"
+                   , "pilot"
+                   , "sprint"
+                   ]
           }
         , { title =
               "Cascaded introduction of TDD in all teams"
@@ -270,6 +277,10 @@ projectPlan =
               \retrospective); good test coverage of code (80%)"
           , completion =
               Incomplete
+          , tags = [ "TDD"
+                   , "sprint"
+                   , "rollout"
+                   ]
           }
         , { title =
               "TDD & tooling training"
@@ -282,6 +293,10 @@ projectPlan =
               "Will be measured in the rollout of TDD"
           , completion =
               Incomplete
+          , tags = [ "TDD"
+                   , "training"
+                   , "tools"
+                   ]
           }
         , { title =
               "Coordinate CI test coverage deployment"
@@ -295,6 +310,11 @@ projectPlan =
               "CI rejects low coverage code (<75%) as if non-compiling"
           , completion =
               Incomplete
+          , tags = [ "TDD"
+                   , "CI"
+                   , "tools"
+                   , "supervision"
+                   ]
           }
         ]
 

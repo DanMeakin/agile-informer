@@ -76,13 +76,6 @@ isFocussed project strategy =
     Just s ->
       s == strategy
 
-type alias Mail =
-  { sender  : String
-  , heading : String
-  , message : String
-  , date    : Date
-  }
-
 type alias Goal =
   { description : String
   }
@@ -98,7 +91,19 @@ type alias Tactic =
   , completionDate     : Maybe Date
   , acceptanceCriteria : String
   , completion         : Completion
+  , tags               : List Tag
   }
+
+type alias Mail =
+  { sender  : String
+  , heading : String
+  , message : String
+  , date    : Date
+  , tags    : List Tag
+  }
+
+type alias Tag =
+  String
 
 -- Avatar 
 

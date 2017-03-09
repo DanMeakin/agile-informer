@@ -9,13 +9,13 @@ import Model exposing (..)
 
 view : Model -> Html Msg
 view model =
-  let viewComponent =
+  let (header, viewComponent) =
         case model.focusedProject of
           Just prj ->
-            projectBody model.currentDate prj
+            (smallHeader prj, projectBody model.currentDate prj)
 
           Nothing ->
-            landingBody model
+            (largeHeader, landingBody model)
 
   in
       body [] 
@@ -25,36 +25,53 @@ view model =
 
 landingBody : Model -> Html Msg
 landingBody model =
-  div [ id "body-container", class "row columns" ]
+  div [ class "row columns" ]
     [ allCards model ]
 
 projectBody : Date -> Project -> Html Msg
 projectBody today project =
-  div [ class "expanded row" ]
+  div [ id "body-container", class "expanded row" ]
     [ div [ id "sidebar", class "small-12 medium-2 columns" ]
         [ sidebar project ]
-    , div [ class "small-12 medium-10 columns" ]
+    , div [ id "project-inner", class "small-12 medium-10 columns" ]
         [ projectInner today project
         ]
     ]
 
 --------------------------------------------------------------------------------
 
-header : Html Msg
-header =
+smallHeader : Project -> Html Msg
+smallHeader prj =
+  let projectTitle project =
+        h1 [] [ text project.name ]
+
+  in
+      div [ id "header-container", class "expanded row columns logo-container align-right align-middle clearfix" ]
+        [ div [ class "float-left" ]
+            [ button [ type_ "button", class "hollow button yellow", onClick UnfocusProject ] 
+                [ text "« Back to Projects" ]
+            ]
+        , div [ class "float-center project-title" ]
+            [ projectTitle prj ]
+        , div [ class "float-right" ]
+            [ div [ id "small-logo", class "logo align-right" ]
+              [ div [ class "logo-the float-left" ]  [ text "The" ]
+              , div [ class "logo-agile-informer float-right" ] [ text "Agile Informer" ]
+              ]
+            ]
+        ]
+
+largeHeader : Html Msg
+largeHeader =
   div [ id "header-container", class "expanded row align-center align-middle" ]
-    [ logo ]
-
-logo : Html Msg
-logo =
-  div [ class "logo-container medium-8 columns clearfix" ]
-    [ div [ id "main-logo", class "logo align-center" ]
-      [ div [ class "logo-the float-left" ]  [ text "The" ]
-      , div [ class "logo-agile-informer float-right" ] [ text "Agile Informer" ]
-      ]
+    [ div [ class "logo-container medium-8 columns clearfix" ]
+        [ div [ id "main-logo", class "logo align-center" ]
+          [ div [ class "logo-the float-left" ]  [ text "The" ]
+          , div [ class "logo-agile-informer float-right" ] [ text "Agile Informer" ]
+          ]
+        ]
     ]
-
-
+  
 --------------------------------------------------------------------------------
 
 sidebar : Project -> Html Msg
@@ -88,13 +105,7 @@ sidebar project =
                 ]
   in
       div []
-        [ h3 [] 
-            [ text project.name 
-            ]
-        , navLink
-        , button [ type_ "button", class "hollow button yellow", onClick UnfocusProject ] 
-            [ text "« Back to Projects" 
-            ]
+        [ navLink
         , br [ class "spacer" ] []
         , ul [ class "vertical menu" ]
             <| [ li [ class "goal" ] 
@@ -172,20 +183,19 @@ tacticsView today project =
           Incomplete ->
             case t.completionDate of
               Just d ->
-                if toTime d < toTime today
-                  then div [ class "label alert" ] [ text "Overdue" ]
-                  else 
-                    let dateString =
-                      String.join " " [ toString <| dayOfWeek d
-                                      , " "
-                                      , toString <| day d
-                                      , " " 
-                                      , toString <| month d
-                                      , " "
-                                      , toString <| year d
-                                      ]
-
-                in div [ class "label primary" ] [ text <| "Due: " ++ dateString ]
+                let dateString =
+                  String.join " " [ toString <| dayOfWeek d
+                                  , " "
+                                  , toString <| day d
+                                  , " " 
+                                  , toString <| month d
+                                  , " "
+                                  , toString <| year d
+                                  ]
+                in
+                    if toTime d < toTime today
+                      then div [ class "label alert" ] [ text <| "Overdue: " ++ dateString ]
+                      else div [ class "label primary" ] [ text <| "Due: " ++ dateString ]
 
               Nothing ->
                 div [ class "label secondary" ] [ text "On hold" ]
@@ -203,6 +213,8 @@ tacticsView today project =
                   , text t.acceptanceCriteria
                   ]
               ]
+          , div [ class "card-section" ]
+              <| List.map tag t.tags
           , div [ class "card-divider", cardBackgroundClass project.background ]
               [ label t ]
           ]
@@ -237,6 +249,8 @@ mailboxView today project =
                   , div [ class "row columns" ]
                       [ text <| showDate msg.date 
                       ]
+                  , div [ class "row columns align-left" ]
+                      [ tags msg ]
                   ]
               , div [ class "small-8 columns" ]
                   [ div [ class "row columns" ]
@@ -250,6 +264,10 @@ mailboxView today project =
                   ]
               ]
           ]
+
+      tags msg =
+        div [ class "mail-tags" ]
+          <| List.map tag msg.tags
 
       toolbar =
         div [ class "toolbar" ]
@@ -270,9 +288,9 @@ mailboxView today project =
 
   in 
       div []
-        [ h3 [] [ text "Mailbox" ]
-        , div [ class "row" ]
-            <| List.map mailMessage project.mailbox
+        [ div [ class "row" ]
+            <| (h3 [] [ text "Mailbox" ])
+                 ::(List.map mailMessage project.mailbox)
         ]
 
 showDate : Date -> String
@@ -311,14 +329,19 @@ projectCard project =
             ] 
         , div [ class "card-section" ]
             [ text project.shortDescription ]
-        , div [ class "card-divider clearfix", bg ]
-            <| List.map statusLabel project.status ++
-               [ button [ class "button tiny primary float-right"
-                        , type_ "button" 
-                        , onClick <| FocusProject project
-                        ] 
-                  [ text "View" ] 
-               ]
+        , div [ class "card-divider", bg ]
+            [ div [ class "row align-middle" ]
+                [ div [ class "small-12 columns" ]
+                    [ div [ class "float-left" ]
+                        <| List.map statusLabel project.status
+                    , button [ class "button small primary float-right no-margin"
+                             , type_ "button" 
+                             , onClick <| FocusProject project
+                             ] 
+                        [ text "View" ] 
+                    ]
+                ]
+            ]
         ]
 
 cardBackgroundClass : Background -> Attribute Msg
@@ -376,4 +399,8 @@ avatarClass av =
   in
       class <| "float-right avatar " ++ classFromAv
 
+
+tag : Tag -> Html Msg
+tag t =
+  div [ class "tag" ] [ text t ]
 

@@ -8322,10 +8322,6 @@ var _DanMeakin$agile_informer$Model$Plan = F3(
 	function (a, b, c) {
 		return {goal: a, strategies: b, focusedStrategy: c};
 	});
-var _DanMeakin$agile_informer$Model$Mail = F4(
-	function (a, b, c, d) {
-		return {sender: a, heading: b, message: c, date: d};
-	});
 var _DanMeakin$agile_informer$Model$Goal = function (a) {
 	return {description: a};
 };
@@ -8333,9 +8329,13 @@ var _DanMeakin$agile_informer$Model$Strategy = F2(
 	function (a, b) {
 		return {description: a, tactics: b};
 	});
-var _DanMeakin$agile_informer$Model$Tactic = F5(
+var _DanMeakin$agile_informer$Model$Tactic = F6(
+	function (a, b, c, d, e, f) {
+		return {title: a, description: b, completionDate: c, acceptanceCriteria: d, completion: e, tags: f};
+	});
+var _DanMeakin$agile_informer$Model$Mail = F5(
 	function (a, b, c, d, e) {
-		return {title: a, description: b, completionDate: c, acceptanceCriteria: d, completion: e};
+		return {sender: a, heading: b, message: c, date: d, tags: e};
 	});
 var _DanMeakin$agile_informer$Model$Avatar = F2(
 	function (a, b) {
@@ -8389,7 +8389,20 @@ var _DanMeakin$agile_informer$MockedData$projectPlan = function () {
 			completionDate: _elm_lang$core$Maybe$Just(
 				_DanMeakin$agile_informer$MockedData$dayOf2017(10)),
 			acceptanceCriteria: 'Usage of up-front testing within the codebase development; high levels of test coverage of code developed (90% target)',
-			completion: _DanMeakin$agile_informer$Model$Successful
+			completion: _DanMeakin$agile_informer$Model$Successful,
+			tags: {
+				ctor: '::',
+				_0: 'TDD',
+				_1: {
+					ctor: '::',
+					_0: 'pilot',
+					_1: {
+						ctor: '::',
+						_0: 'sprint',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
 		},
 		_1: {
 			ctor: '::',
@@ -8399,11 +8412,43 @@ var _DanMeakin$agile_informer$MockedData$projectPlan = function () {
 				completionDate: _elm_lang$core$Maybe$Just(
 					_DanMeakin$agile_informer$MockedData$dayOf2017(58)),
 				acceptanceCriteria: 'Confident usage of TDD throughout one Sprint (measured in retrospective); good test coverage of code (80%)',
-				completion: _DanMeakin$agile_informer$Model$Incomplete
+				completion: _DanMeakin$agile_informer$Model$Incomplete,
+				tags: {
+					ctor: '::',
+					_0: 'TDD',
+					_1: {
+						ctor: '::',
+						_0: 'sprint',
+						_1: {
+							ctor: '::',
+							_0: 'rollout',
+							_1: {ctor: '[]'}
+						}
+					}
+				}
 			},
 			_1: {
 				ctor: '::',
-				_0: {title: 'TDD & tooling training', description: 'Carry out developer training in TDD practices and supporting tooling available to them.', completionDate: _elm_lang$core$Maybe$Nothing, acceptanceCriteria: 'Will be measured in the rollout of TDD', completion: _DanMeakin$agile_informer$Model$Incomplete},
+				_0: {
+					title: 'TDD & tooling training',
+					description: 'Carry out developer training in TDD practices and supporting tooling available to them.',
+					completionDate: _elm_lang$core$Maybe$Nothing,
+					acceptanceCriteria: 'Will be measured in the rollout of TDD',
+					completion: _DanMeakin$agile_informer$Model$Incomplete,
+					tags: {
+						ctor: '::',
+						_0: 'TDD',
+						_1: {
+							ctor: '::',
+							_0: 'training',
+							_1: {
+								ctor: '::',
+								_0: 'tools',
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
 				_1: {
 					ctor: '::',
 					_0: {
@@ -8412,7 +8457,24 @@ var _DanMeakin$agile_informer$MockedData$projectPlan = function () {
 						completionDate: _elm_lang$core$Maybe$Just(
 							_DanMeakin$agile_informer$MockedData$dayOf2017(100)),
 						acceptanceCriteria: 'CI rejects low coverage code (<75%) as if non-compiling',
-						completion: _DanMeakin$agile_informer$Model$Incomplete
+						completion: _DanMeakin$agile_informer$Model$Incomplete,
+						tags: {
+							ctor: '::',
+							_0: 'TDD',
+							_1: {
+								ctor: '::',
+								_0: 'CI',
+								_1: {
+									ctor: '::',
+									_0: 'tools',
+									_1: {
+										ctor: '::',
+										_0: 'supervision',
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
 					},
 					_1: {ctor: '[]'}
 				}
@@ -8427,14 +8489,65 @@ var _DanMeakin$agile_informer$MockedData$projectPlan = function () {
 			completionDate: _elm_lang$core$Maybe$Just(
 				_DanMeakin$agile_informer$MockedData$dayOf2017(30)),
 			acceptanceCriteria: 'Full training completed by all POs by completion date.',
-			completion: _DanMeakin$agile_informer$Model$Unsuccessful
+			completion: _DanMeakin$agile_informer$Model$Unsuccessful,
+			tags: {
+				ctor: '::',
+				_0: 'product owner',
+				_1: {
+					ctor: '::',
+					_0: 'training',
+					_1: {ctor: '[]'}
+				}
+			}
 		},
 		_1: {
 			ctor: '::',
-			_0: {title: 'Discussions with PMs of their roles re requirements', description: 'Ongoing discussions with PMs to clarify their role in the requirements process within agile development.', completionDate: _elm_lang$core$Maybe$Nothing, acceptanceCriteria: 'PMs not involved in planning product content.', completion: _DanMeakin$agile_informer$Model$Incomplete},
+			_0: {
+				title: 'Discussions with PMs of their roles re requirements',
+				description: 'Ongoing discussions with PMs to clarify their role in the requirements process within agile development.',
+				completionDate: _elm_lang$core$Maybe$Nothing,
+				acceptanceCriteria: 'PMs not involved in planning product content.',
+				completion: _DanMeakin$agile_informer$Model$Incomplete,
+				tags: {
+					ctor: '::',
+					_0: 'project manager',
+					_1: {
+						ctor: '::',
+						_0: 'culture',
+						_1: {
+							ctor: '::',
+							_0: 'roles',
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			},
 			_1: {
 				ctor: '::',
-				_0: {title: 'Promote dev-PO contact', description: 'Push a common theme in communications to dev team that they should be contacting the PO regularly about any product issues or questions.', completionDate: _elm_lang$core$Maybe$Nothing, acceptanceCriteria: 'Lack of complaints about product requirements; clarity', completion: _DanMeakin$agile_informer$Model$Incomplete},
+				_0: {
+					title: 'Promote dev-PO contact',
+					description: 'Push a common theme in communications to dev team that they should be contacting the PO regularly about any product issues or questions.',
+					completionDate: _elm_lang$core$Maybe$Nothing,
+					acceptanceCriteria: 'Lack of complaints about product requirements; clarity',
+					completion: _DanMeakin$agile_informer$Model$Incomplete,
+					tags: {
+						ctor: '::',
+						_0: 'product owner',
+						_1: {
+							ctor: '::',
+							_0: 'communication',
+							_1: {
+								ctor: '::',
+								_0: 'devs',
+								_1: {
+									ctor: '::',
+									_0: 'roles',
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
 				_1: {
 					ctor: '::',
 					_0: {
@@ -8443,7 +8556,16 @@ var _DanMeakin$agile_informer$MockedData$projectPlan = function () {
 						completionDate: _elm_lang$core$Maybe$Just(
 							_DanMeakin$agile_informer$MockedData$dayOf2017(35)),
 						acceptanceCriteria: '25% of POs co-located',
-						completion: _DanMeakin$agile_informer$Model$Successful
+						completion: _DanMeakin$agile_informer$Model$Successful,
+						tags: {
+							ctor: '::',
+							_0: 'product owner',
+							_1: {
+								ctor: '::',
+								_0: 'co-location',
+								_1: {ctor: '[]'}
+							}
+						}
 					},
 					_1: {
 						ctor: '::',
@@ -8453,7 +8575,20 @@ var _DanMeakin$agile_informer$MockedData$projectPlan = function () {
 							completionDate: _elm_lang$core$Maybe$Just(
 								_DanMeakin$agile_informer$MockedData$dayOf2017(160)),
 							acceptanceCriteria: 'Positive or very positive perception of PO role within all Scrum teams',
-							completion: _DanMeakin$agile_informer$Model$Incomplete
+							completion: _DanMeakin$agile_informer$Model$Incomplete,
+							tags: {
+								ctor: '::',
+								_0: 'product owner',
+								_1: {
+									ctor: '::',
+									_0: 'teams',
+									_1: {
+										ctor: '::',
+										_0: 'expectations',
+										_1: {ctor: '[]'}
+									}
+								}
+							}
 						},
 						_1: {ctor: '[]'}
 					}
@@ -8484,7 +8619,16 @@ var _DanMeakin$agile_informer$MockedData$project3 = function () {
 			heading: 'How does XP help us??',
 			message: 'We don\'t even make software wtf?!?!?!',
 			sender: 'Anna Anorak',
-			date: _DanMeakin$agile_informer$MockedData$dayOf2017(41)
+			date: _DanMeakin$agile_informer$MockedData$dayOf2017(41),
+			tags: {
+				ctor: '::',
+				_0: 'XP',
+				_1: {
+					ctor: '::',
+					_0: 'culture',
+					_1: {ctor: '[]'}
+				}
+			}
 		},
 		_1: {ctor: '[]'}
 	};
@@ -8492,7 +8636,7 @@ var _DanMeakin$agile_informer$MockedData$project3 = function () {
 		name: 'XP Study @ Danske Øl og Vin',
 		shortDescription: 'Investigation into usability of XP within a Danish drinks company. Commenced 10th November 2016; concluded 30th January 2017.',
 		longDescription: 'Longer description of the full details of the transformation process...',
-		avatar: {gender: _DanMeakin$agile_informer$Model$Man, num: 1},
+		avatar: {gender: _DanMeakin$agile_informer$Model$Man, num: 3},
 		background: _DanMeakin$agile_informer$Model$Seigaiha,
 		status: {
 			ctor: '::',
@@ -8510,9 +8654,22 @@ var _DanMeakin$agile_informer$MockedData$project2 = function () {
 		ctor: '::',
 		_0: {
 			heading: 'Problems with requirements',
-			message: 'We keep getting requirements from PMs which they want us to complete separate from the sprints. I think this is a problem..',
+			message: 'We keep getting requirements from PMs which they want us to complete separately from the sprints. I think this is a problem..',
 			sender: 'Peter Petersen',
-			date: _DanMeakin$agile_informer$MockedData$dayOf2017(45)
+			date: _DanMeakin$agile_informer$MockedData$dayOf2017(45),
+			tags: {
+				ctor: '::',
+				_0: 'requirements',
+				_1: {
+					ctor: '::',
+					_0: 'project manager',
+					_1: {
+						ctor: '::',
+						_0: 'non-agile',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
 		},
 		_1: {ctor: '[]'}
 	};
@@ -8544,7 +8701,12 @@ var _DanMeakin$agile_informer$MockedData$project1 = function () {
 			heading: 'Difficulty adopting TDD in team',
 			message: 'Hey,\n\nWe are really finding it difficult to do TDD in the team. Can you help out? Do you know any good ways to get started?\n\nThanks,\n\nJens',
 			sender: 'Jens Jensen',
-			date: _DanMeakin$agile_informer$MockedData$dayOf2017(30)
+			date: _DanMeakin$agile_informer$MockedData$dayOf2017(30),
+			tags: {
+				ctor: '::',
+				_0: 'TDD',
+				_1: {ctor: '[]'}
+			}
 		},
 		_1: {
 			ctor: '::',
@@ -8552,7 +8714,16 @@ var _DanMeakin$agile_informer$MockedData$project1 = function () {
 				heading: 'How much XP should we do?',
 				message: 'We don\'t really know what we should be doing from XP. You said we could do things like pair programming, TDD, etc. but we don\'t know what is best. Can you advise? Thanks!',
 				sender: 'Lauren Laird',
-				date: _DanMeakin$agile_informer$MockedData$dayOf2017(33)
+				date: _DanMeakin$agile_informer$MockedData$dayOf2017(33),
+				tags: {
+					ctor: '::',
+					_0: 'XP',
+					_1: {
+						ctor: '::',
+						_0: 'practice choice',
+						_1: {ctor: '[]'}
+					}
+				}
 			},
 			_1: {
 				ctor: '::',
@@ -8560,7 +8731,20 @@ var _DanMeakin$agile_informer$MockedData$project1 = function () {
 					heading: 'PO is useless...',
 					message: 'Our PO doesn\'t know how to do any refinements or grooming, which is a real problem now. Our backlog is totally chaotic. Can you help?',
 					sender: 'Jemma Smith',
-					date: _DanMeakin$agile_informer$MockedData$dayOf2017(55)
+					date: _DanMeakin$agile_informer$MockedData$dayOf2017(55),
+					tags: {
+						ctor: '::',
+						_0: 'product owner',
+						_1: {
+							ctor: '::',
+							_0: 'backlog',
+							_1: {
+								ctor: '::',
+								_0: 'requirements',
+								_1: {ctor: '[]'}
+							}
+						}
+					}
 				},
 				_1: {ctor: '[]'}
 			}
@@ -9065,6 +9249,20 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
+var _DanMeakin$agile_informer$View$tag = function (t) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('tag'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(t),
+			_1: {ctor: '[]'}
+		});
+};
 var _DanMeakin$agile_informer$View$avatarClass = function (av) {
 	var genderPrefix = function () {
 		var _p0 = av.gender;
@@ -9230,41 +9428,71 @@ var _DanMeakin$agile_informer$View$projectCard = function (project) {
 						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('card-divider clearfix'),
+							_0: _elm_lang$html$Html_Attributes$class('card-divider'),
 							_1: {
 								ctor: '::',
 								_0: bg,
 								_1: {ctor: '[]'}
 							}
 						},
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							A2(_elm_lang$core$List$map, _DanMeakin$agile_informer$View$statusLabel, project.status),
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('button tiny primary float-right'),
-										_1: {
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('row align-middle'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$type_('button'),
+											_0: _elm_lang$html$Html_Attributes$class('small-12 columns'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('float-left'),
+													_1: {ctor: '[]'}
+												},
+												A2(_elm_lang$core$List$map, _DanMeakin$agile_informer$View$statusLabel, project.status)),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onClick(
-													_DanMeakin$agile_informer$Model$FocusProject(project)),
+												_0: A2(
+													_elm_lang$html$Html$button,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('button small primary float-right no-margin'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$type_('button'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Events$onClick(
+																	_DanMeakin$agile_informer$Model$FocusProject(project)),
+																_1: {ctor: '[]'}
+															}
+														}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('View'),
+														_1: {ctor: '[]'}
+													}),
 												_1: {ctor: '[]'}
 											}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('View'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							})),
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
 					_1: {ctor: '[]'}
 				}
 			}
@@ -9466,6 +9694,16 @@ var _DanMeakin$agile_informer$View$mailboxView = F2(
 					}
 				}
 			});
+		var tags = function (msg) {
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('mail-tags'),
+					_1: {ctor: '[]'}
+				},
+				A2(_elm_lang$core$List$map, _DanMeakin$agile_informer$View$tag, msg.tags));
+		};
 		var mailMessage = function (msg) {
 			return A2(
 				_elm_lang$html$Html$div,
@@ -9521,7 +9759,22 @@ var _DanMeakin$agile_informer$View$mailboxView = F2(
 													_DanMeakin$agile_informer$View$showDate(msg.date)),
 												_1: {ctor: '[]'}
 											}),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('row columns align-left'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: tags(msg),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
 									}
 								}),
 							_1: {
@@ -9598,25 +9851,25 @@ var _DanMeakin$agile_informer$View$mailboxView = F2(
 			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$h3,
-					{ctor: '[]'},
+					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('Mailbox'),
+						_0: _elm_lang$html$Html_Attributes$class('row'),
 						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h3,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Mailbox'),
+								_1: {ctor: '[]'}
+							}),
+						_1: A2(_elm_lang$core$List$map, mailMessage, project.mailbox)
 					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('row'),
-							_1: {ctor: '[]'}
-						},
-						A2(_elm_lang$core$List$map, mailMessage, project.mailbox)),
-					_1: {ctor: '[]'}
-				}
+				_1: {ctor: '[]'}
 			});
 	});
 var _DanMeakin$agile_informer$View$tacticsView = F2(
@@ -9654,72 +9907,69 @@ var _DanMeakin$agile_informer$View$tacticsView = F2(
 					var _p4 = t.completionDate;
 					if (_p4.ctor === 'Just') {
 						var _p5 = _p4._0;
-						if (_elm_lang$core$Native_Utils.cmp(
-							_elm_lang$core$Date$toTime(_p5),
-							_elm_lang$core$Date$toTime(today)) < 0) {
-							return A2(
-								_elm_lang$html$Html$div,
-								{
+						var dateString = A2(
+							_elm_lang$core$String$join,
+							' ',
+							{
+								ctor: '::',
+								_0: _elm_lang$core$Basics$toString(
+									_elm_lang$core$Date$dayOfWeek(_p5)),
+								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('label alert'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Overdue'),
-									_1: {ctor: '[]'}
-								});
-						} else {
-							var dateString = A2(
-								_elm_lang$core$String$join,
-								' ',
-								{
-									ctor: '::',
-									_0: _elm_lang$core$Basics$toString(
-										_elm_lang$core$Date$dayOfWeek(_p5)),
+									_0: ' ',
 									_1: {
 										ctor: '::',
-										_0: ' ',
+										_0: _elm_lang$core$Basics$toString(
+											_elm_lang$core$Date$day(_p5)),
 										_1: {
 											ctor: '::',
-											_0: _elm_lang$core$Basics$toString(
-												_elm_lang$core$Date$day(_p5)),
+											_0: ' ',
 											_1: {
 												ctor: '::',
-												_0: ' ',
+												_0: _elm_lang$core$Basics$toString(
+													_elm_lang$core$Date$month(_p5)),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$core$Basics$toString(
-														_elm_lang$core$Date$month(_p5)),
+													_0: ' ',
 													_1: {
 														ctor: '::',
-														_0: ' ',
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$core$Basics$toString(
-																_elm_lang$core$Date$year(_p5)),
-															_1: {ctor: '[]'}
-														}
+														_0: _elm_lang$core$Basics$toString(
+															_elm_lang$core$Date$year(_p5)),
+														_1: {ctor: '[]'}
 													}
 												}
 											}
 										}
 									}
-								});
-							return A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('label primary'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(
-										A2(_elm_lang$core$Basics_ops['++'], 'Due: ', dateString)),
-									_1: {ctor: '[]'}
-								});
-						}
+								}
+							});
+						return (_elm_lang$core$Native_Utils.cmp(
+							_elm_lang$core$Date$toTime(_p5),
+							_elm_lang$core$Date$toTime(today)) < 0) ? A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('label alert'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(
+									A2(_elm_lang$core$Basics_ops['++'], 'Overdue: ', dateString)),
+								_1: {ctor: '[]'}
+							}) : A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('label primary'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(
+									A2(_elm_lang$core$Basics_ops['++'], 'Due: ', dateString)),
+								_1: {ctor: '[]'}
+							});
 					} else {
 						return A2(
 							_elm_lang$html$Html$div,
@@ -9814,19 +10064,30 @@ var _DanMeakin$agile_informer$View$tacticsView = F2(
 									_elm_lang$html$Html$div,
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('card-divider'),
-										_1: {
-											ctor: '::',
-											_0: _DanMeakin$agile_informer$View$cardBackgroundClass(project.background),
-											_1: {ctor: '[]'}
-										}
-									},
-									{
-										ctor: '::',
-										_0: label(t),
+										_0: _elm_lang$html$Html_Attributes$class('card-section'),
 										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
+									},
+									A2(_elm_lang$core$List$map, _DanMeakin$agile_informer$View$tag, t.tags)),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('card-divider'),
+											_1: {
+												ctor: '::',
+												_0: _DanMeakin$agile_informer$View$cardBackgroundClass(project.background),
+												_1: {ctor: '[]'}
+											}
+										},
+										{
+											ctor: '::',
+											_0: label(t),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
 							}
 						}
 					}
@@ -10108,18 +10369,183 @@ var _DanMeakin$agile_informer$View$sidebar = function (project) {
 		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$h3,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(project.name),
-					_1: {ctor: '[]'}
-				}),
+			_0: navLink,
 			_1: {
 				ctor: '::',
-				_0: navLink,
+				_0: A2(
+					_elm_lang$html$Html$br,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('spacer'),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
 				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$ul,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('vertical menu'),
+							_1: {ctor: '[]'}
+						},
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$li,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('goal'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$h4,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Goal'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$ul,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('nested vertical menu'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$li,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('goal-text'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text(project.plan.goal.description),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							},
+							A2(_elm_lang$core$List$map, mkStrategy, project.plan.strategies))),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _DanMeakin$agile_informer$View$largeHeader = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$id('header-container'),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('expanded row align-center align-middle'),
+			_1: {ctor: '[]'}
+		}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('logo-container medium-8 columns clearfix'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$id('main-logo'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('logo align-center'),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('logo-the float-left'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('The'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('logo-agile-informer float-right'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Agile Informer'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _DanMeakin$agile_informer$View$smallHeader = function (prj) {
+	var projectTitle = function (project) {
+		return A2(
+			_elm_lang$html$Html$h1,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(project.name),
+				_1: {ctor: '[]'}
+			});
+	};
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('header-container'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('expanded row columns logo-container align-right align-middle clearfix'),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('float-left'),
+					_1: {ctor: '[]'}
+				},
+				{
 					ctor: '::',
 					_0: A2(
 						_elm_lang$html$Html$button,
@@ -10141,116 +10567,20 @@ var _DanMeakin$agile_informer$View$sidebar = function (project) {
 							_0: _elm_lang$html$Html$text('« Back to Projects'),
 							_1: {ctor: '[]'}
 						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$br,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('spacer'),
-								_1: {ctor: '[]'}
-							},
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$ul,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('vertical menu'),
-									_1: {ctor: '[]'}
-								},
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$li,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('goal'),
-												_1: {ctor: '[]'}
-											},
-											{
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$h4,
-													{ctor: '[]'},
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html$text('Goal'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {
-													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html$ul,
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$class('nested vertical menu'),
-															_1: {ctor: '[]'}
-														},
-														{
-															ctor: '::',
-															_0: A2(
-																_elm_lang$html$Html$li,
-																{
-																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('goal-text'),
-																	_1: {ctor: '[]'}
-																},
-																{
-																	ctor: '::',
-																	_0: _elm_lang$html$Html$text(project.plan.goal.description),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}
-											}),
-										_1: {ctor: '[]'}
-									},
-									A2(_elm_lang$core$List$map, mkStrategy, project.plan.strategies))),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
-		});
-};
-var _DanMeakin$agile_informer$View$logo = A2(
-	_elm_lang$html$Html$div,
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('logo-container medium-8 columns clearfix'),
-		_1: {ctor: '[]'}
-	},
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$id('main-logo'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('logo align-center'),
 					_1: {ctor: '[]'}
-				}
-			},
-			{
+				}),
+			_1: {
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('logo-the float-left'),
+						_0: _elm_lang$html$Html_Attributes$class('float-center project-title'),
 						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('The'),
+						_0: projectTitle(prj),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -10259,43 +10589,72 @@ var _DanMeakin$agile_informer$View$logo = A2(
 						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('logo-agile-informer float-right'),
+							_0: _elm_lang$html$Html_Attributes$class('float-right'),
 							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Agile Informer'),
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$id('small-logo'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('logo align-right'),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('logo-the float-left'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('The'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('logo-agile-informer float-right'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Agile Informer'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
 				}
-			}),
-		_1: {ctor: '[]'}
-	});
-var _DanMeakin$agile_informer$View$header = A2(
-	_elm_lang$html$Html$div,
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$id('header-container'),
-		_1: {
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('expanded row align-center align-middle'),
-			_1: {ctor: '[]'}
-		}
-	},
-	{
-		ctor: '::',
-		_0: _DanMeakin$agile_informer$View$logo,
-		_1: {ctor: '[]'}
-	});
+			}
+		});
+};
 var _DanMeakin$agile_informer$View$projectBody = F2(
 	function (today, project) {
 		return A2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('expanded row'),
-				_1: {ctor: '[]'}
+				_0: _elm_lang$html$Html_Attributes$id('body-container'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('expanded row'),
+					_1: {ctor: '[]'}
+				}
 			},
 			{
 				ctor: '::',
@@ -10321,8 +10680,12 @@ var _DanMeakin$agile_informer$View$projectBody = F2(
 						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('small-12 medium-10 columns'),
-							_1: {ctor: '[]'}
+							_0: _elm_lang$html$Html_Attributes$id('project-inner'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('small-12 medium-10 columns'),
+								_1: {ctor: '[]'}
+							}
 						},
 						{
 							ctor: '::',
@@ -10338,12 +10701,8 @@ var _DanMeakin$agile_informer$View$landingBody = function (model) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id('body-container'),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('row columns'),
-				_1: {ctor: '[]'}
-			}
+			_0: _elm_lang$html$Html_Attributes$class('row columns'),
+			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
@@ -10352,20 +10711,31 @@ var _DanMeakin$agile_informer$View$landingBody = function (model) {
 		});
 };
 var _DanMeakin$agile_informer$View$view = function (model) {
-	var viewComponent = function () {
-		var _p12 = model.focusedProject;
-		if (_p12.ctor === 'Just') {
-			return A2(_DanMeakin$agile_informer$View$projectBody, model.currentDate, _p12._0);
+	var _p12 = function () {
+		var _p13 = model.focusedProject;
+		if (_p13.ctor === 'Just') {
+			var _p14 = _p13._0;
+			return {
+				ctor: '_Tuple2',
+				_0: _DanMeakin$agile_informer$View$smallHeader(_p14),
+				_1: A2(_DanMeakin$agile_informer$View$projectBody, model.currentDate, _p14)
+			};
 		} else {
-			return _DanMeakin$agile_informer$View$landingBody(model);
+			return {
+				ctor: '_Tuple2',
+				_0: _DanMeakin$agile_informer$View$largeHeader,
+				_1: _DanMeakin$agile_informer$View$landingBody(model)
+			};
 		}
 	}();
+	var header = _p12._0;
+	var viewComponent = _p12._1;
 	return A2(
 		_elm_lang$html$Html$body,
 		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _DanMeakin$agile_informer$View$header,
+			_0: header,
 			_1: {
 				ctor: '::',
 				_0: viewComponent,

@@ -9,8 +9,15 @@
 // Logo fonts
 @import url('https://fonts.googleapis.com/css?family=Bungee+Shade|Source+Sans+Pro:400,700|Vampiro+One');
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Source Sans Pro', sans-serif;
+  overflow: hidden;
 }
 
 .main {
@@ -70,6 +77,15 @@ body {
 }
 
 #body-container {
+  height: calc(100% - 7rem);
+
+  #project-inner {
+    overflow: scroll;
+    height: 100%;
+  }
+}
+
+#project-cards {
   margin-top: 1em;
 }
 
@@ -111,6 +127,37 @@ body {
     line-height: 5.5rem;
     padding-bottom: 1.5rem;
   }
+}
+
+#small-logo {
+  display: table;
+  width: 13rem;
+  height: 6rem;
+  margin: 0 auto;
+
+  .logo-the {
+    @include logo-secondary-font;
+    transform: rotate(-20deg);
+    font-size: 2.5rem;
+    top: 1.5rem;
+    margin-left: -5rem;
+    display: table-row;
+    color: white;
+  }
+
+  .logo-agile-informer {
+    @include logo-font;
+    font-size: 2.5rem;
+    margin-top: 0.5rem;
+    margin-left: -1rem;
+    display: table-row;
+    line-height: 2.75rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+.project-title h1 {
+  color: white;
 }
 
 #sidebar {
@@ -164,4 +211,21 @@ body {
 
 .toolbar .button {
   margin-right: 0.2rem;
+}
+
+.mail-tags {
+
+}
+
+.tag {
+  $margin: 0.2rem;
+  @include label;
+  font-size: smaller;
+  background-color: yellow;
+  margin-right: $margin;
+  margin-bottom: $margin;
+}
+
+.button.no-margin {
+  margin: 0 0 0 0;
 }

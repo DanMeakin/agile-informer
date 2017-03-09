@@ -4449,8 +4449,14 @@ a.thumbnail {
   flex: 0 0 auto;
   max-width: 100%; }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0; }
+
 body {
-  font-family: 'Source Sans Pro', sans-serif; }
+  font-family: 'Source Sans Pro', sans-serif;
+  overflow: hidden; }
 
 .main {
   background: red; }
@@ -4501,6 +4507,12 @@ body {
   margin-right: 0.5em; }
 
 #body-container {
+  height: calc(100% - 7rem); }
+  #body-container #project-inner {
+    overflow: scroll;
+    height: 100%; }
+
+#project-cards {
   margin-top: 1em; }
 
 #header-container {
@@ -4528,6 +4540,32 @@ body {
     display: table-row;
     line-height: 5.5rem;
     padding-bottom: 1.5rem; }
+
+#small-logo {
+  display: table;
+  width: 13rem;
+  height: 6rem;
+  margin: 0 auto; }
+  #small-logo .logo-the {
+    font-family: 'Vampiro One', cursive;
+    transform: rotate(-20deg);
+    font-size: 2.5rem;
+    top: 1.5rem;
+    margin-left: -5rem;
+    display: table-row;
+    color: white; }
+  #small-logo .logo-agile-informer {
+    font-family: 'Bungee Shade', cursive;
+    color: yellow;
+    font-size: 2.5rem;
+    margin-top: 0.5rem;
+    margin-left: -1rem;
+    display: table-row;
+    line-height: 2.75rem;
+    padding-bottom: 1.5rem; }
+
+.project-title h1 {
+  color: white; }
 
 #sidebar {
   background-image: url("images/header-texture.png");
@@ -4567,6 +4605,22 @@ body {
 
 .toolbar .button {
   margin-right: 0.2rem; }
+
+.tag {
+  display: inline-block;
+  padding: 0.33333rem 0.5rem;
+  border-radius: 0;
+  font-size: 0.8rem;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: default;
+  font-size: smaller;
+  background-color: yellow;
+  margin-right: 0.2rem;
+  margin-bottom: 0.2rem; }
+
+.button.no-margin {
+  margin: 0 0 0 0; }
 
 
 /* 
