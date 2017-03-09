@@ -8302,6 +8302,14 @@ var _DanMeakin$agile_informer$Model$isFocussed = F2(
 			return _elm_lang$core$Native_Utils.eq(_p0._0, strategy);
 		}
 	});
+var _DanMeakin$agile_informer$Model$tactics = function (project) {
+	return A2(
+		_elm_lang$core$List$concatMap,
+		function (_) {
+			return _.tactics;
+		},
+		project.plan.strategies);
+};
 var _DanMeakin$agile_informer$Model$Model = F3(
 	function (a, b, c) {
 		return {projects: a, focusedProject: b, currentDate: c};
@@ -8310,9 +8318,9 @@ var _DanMeakin$agile_informer$Model$Project = F9(
 	function (a, b, c, d, e, f, g, h, i) {
 		return {avatar: a, background: b, name: c, shortDescription: d, longDescription: e, status: f, plan: g, mailbox: h, showView: i};
 	});
-var _DanMeakin$agile_informer$Model$Plan = F4(
-	function (a, b, c, d) {
-		return {goal: a, strategies: b, tactics: c, focusedStrategy: d};
+var _DanMeakin$agile_informer$Model$Plan = F3(
+	function (a, b, c) {
+		return {goal: a, strategies: b, focusedStrategy: c};
 	});
 var _DanMeakin$agile_informer$Model$Mail = F4(
 	function (a, b, c, d) {
@@ -8327,7 +8335,7 @@ var _DanMeakin$agile_informer$Model$Strategy = F2(
 	});
 var _DanMeakin$agile_informer$Model$Tactic = F5(
 	function (a, b, c, d, e) {
-		return {title: a, description: b, completionDate: c, acceptanceCriteria: d, success: e};
+		return {title: a, description: b, completionDate: c, acceptanceCriteria: d, completion: e};
 	});
 var _DanMeakin$agile_informer$Model$Avatar = F2(
 	function (a, b) {
@@ -8362,230 +8370,233 @@ var _DanMeakin$agile_informer$Model$Inactive = {ctor: 'Inactive'};
 var _DanMeakin$agile_informer$Model$Active = {ctor: 'Active'};
 var _DanMeakin$agile_informer$Model$Successful = {ctor: 'Successful'};
 var _DanMeakin$agile_informer$Model$Unsuccessful = {ctor: 'Unsuccessful'};
+var _DanMeakin$agile_informer$Model$Incomplete = {ctor: 'Incomplete'};
 var _DanMeakin$agile_informer$Model$Woman = {ctor: 'Woman'};
 var _DanMeakin$agile_informer$Model$Man = {ctor: 'Man'};
-var _DanMeakin$agile_informer$Model$mockedModel = function (date) {
-	var tacticDescriptions = {
+
+var _DanMeakin$agile_informer$MockedData$start2017 = 1483228800000;
+var _DanMeakin$agile_informer$MockedData$dayOf2017 = function (n) {
+	var oneDay = 86400000;
+	return _elm_lang$core$Date$fromTime(
+		_DanMeakin$agile_informer$MockedData$start2017 + _elm_lang$core$Basics$toFloat(n * oneDay));
+};
+var _DanMeakin$agile_informer$MockedData$projectPlan = function () {
+	var tddTactics = {
 		ctor: '::',
-		_0: 'Do this particular thing.',
+		_0: {
+			title: 'Pilot TDD project in Team Α',
+			description: 'Undertake a pilot TDD project within Team Α. This will involve the use of TDD for one sprint. (Team Α has the most experienced agile devs so is the best choice.)',
+			completionDate: _elm_lang$core$Maybe$Just(
+				_DanMeakin$agile_informer$MockedData$dayOf2017(10)),
+			acceptanceCriteria: 'Usage of up-front testing within the codebase development; high levels of test coverage of code developed (90% target)',
+			completion: _DanMeakin$agile_informer$Model$Successful
+		},
 		_1: {
 			ctor: '::',
-			_0: 'Make this happen.',
+			_0: {
+				title: 'Cascaded introduction of TDD in all teams',
+				description: 'Introduction of TDD usage within all 10 Scrum teams. This will be used within one sprint.',
+				completionDate: _elm_lang$core$Maybe$Just(
+					_DanMeakin$agile_informer$MockedData$dayOf2017(58)),
+				acceptanceCriteria: 'Confident usage of TDD throughout one Sprint (measured in retrospective); good test coverage of code (80%)',
+				completion: _DanMeakin$agile_informer$Model$Incomplete
+			},
 			_1: {
 				ctor: '::',
-				_0: 'Work with this individual.',
+				_0: {title: 'TDD & tooling training', description: 'Carry out developer training in TDD practices and supporting tooling available to them.', completionDate: _elm_lang$core$Maybe$Nothing, acceptanceCriteria: 'Will be measured in the rollout of TDD', completion: _DanMeakin$agile_informer$Model$Incomplete},
 				_1: {
 					ctor: '::',
-					_0: 'Another tactic.',
+					_0: {
+						title: 'Coordinate CI test coverage deployment',
+						description: 'CI can be used to automatically measure test coverage. Oversee the rollout of CI test coverage tooling (with rejection on low coverage code).',
+						completionDate: _elm_lang$core$Maybe$Just(
+							_DanMeakin$agile_informer$MockedData$dayOf2017(100)),
+						acceptanceCriteria: 'CI rejects low coverage code (<75%) as if non-compiling',
+						completion: _DanMeakin$agile_informer$Model$Incomplete
+					},
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	};
+	var productOwnerTactics = {
+		ctor: '::',
+		_0: {
+			title: 'PO induction & training',
+			description: 'All POs will be given a full induction and training in their role within the development. This should be completed ASAP.',
+			completionDate: _elm_lang$core$Maybe$Just(
+				_DanMeakin$agile_informer$MockedData$dayOf2017(30)),
+			acceptanceCriteria: 'Full training completed by all POs by completion date.',
+			completion: _DanMeakin$agile_informer$Model$Unsuccessful
+		},
+		_1: {
+			ctor: '::',
+			_0: {title: 'Discussions with PMs of their roles re requirements', description: 'Ongoing discussions with PMs to clarify their role in the requirements process within agile development.', completionDate: _elm_lang$core$Maybe$Nothing, acceptanceCriteria: 'PMs not involved in planning product content.', completion: _DanMeakin$agile_informer$Model$Incomplete},
+			_1: {
+				ctor: '::',
+				_0: {title: 'Promote dev-PO contact', description: 'Push a common theme in communications to dev team that they should be contacting the PO regularly about any product issues or questions.', completionDate: _elm_lang$core$Maybe$Nothing, acceptanceCriteria: 'Lack of complaints about product requirements; clarity', completion: _DanMeakin$agile_informer$Model$Incomplete},
+				_1: {
+					ctor: '::',
+					_0: {
+						title: 'Co-location of POs within teams',
+						description: 'Some POs can be co-located with development teams. This will improve the engagement of the team with the PO.',
+						completionDate: _elm_lang$core$Maybe$Just(
+							_DanMeakin$agile_informer$MockedData$dayOf2017(35)),
+						acceptanceCriteria: '25% of POs co-located',
+						completion: _DanMeakin$agile_informer$Model$Successful
+					},
 					_1: {
 						ctor: '::',
-						_0: 'More specific explanation of what we will do here.',
+						_0: {
+							title: 'Monitor PO acceptance by teams',
+							description: 'Obtain metrics of team perception of PO role, their usefulness over time.',
+							completionDate: _elm_lang$core$Maybe$Just(
+								_DanMeakin$agile_informer$MockedData$dayOf2017(160)),
+							acceptanceCriteria: 'Positive or very positive perception of PO role within all Scrum teams',
+							completion: _DanMeakin$agile_informer$Model$Incomplete
+						},
 						_1: {ctor: '[]'}
 					}
 				}
 			}
 		}
 	};
-	var oneDay = 86400000;
-	var feb5th = 1486252800000;
-	var tactics = A2(
-		_elm_lang$core$List$map,
-		function (n) {
-			return {
-				title: A2(
-					_elm_lang$core$Basics_ops['++'],
-					'Tactic ',
-					_elm_lang$core$Basics$toString(n)),
-				description: A2(
-					_elm_lang$core$Maybe$withDefault,
-					'',
-					_elm_lang$core$List$head(
-						A2(
-							_elm_lang$core$List$drop,
-							A2(_elm_lang$core$Basics$rem, n, 5),
-							tacticDescriptions))),
-				completionDate: (_elm_lang$core$Native_Utils.cmp(
-					A2(_elm_lang$core$Basics$rem, n, 12),
-					8) > 0) ? _elm_lang$core$Maybe$Nothing : function (_p1) {
-					return _elm_lang$core$Maybe$Just(
-						_elm_lang$core$Date$fromTime(
-							_elm_lang$core$Basics$toFloat(_p1)));
-				}(
-					feb5th + ((oneDay * 7) * A2(_elm_lang$core$Basics$rem, n, 10))),
-				acceptanceCriteria: 'Measure against ...',
-				success: function () {
-					var _p2 = A2(_elm_lang$core$Basics$rem, n, 10);
-					switch (_p2) {
-						case 1:
-							return _elm_lang$core$Maybe$Just(_DanMeakin$agile_informer$Model$Successful);
-						case 2:
-							return _elm_lang$core$Maybe$Just(_DanMeakin$agile_informer$Model$Unsuccessful);
-						default:
-							return _elm_lang$core$Maybe$Nothing;
-					}
-				}()
-			};
-		},
-		A2(_elm_lang$core$List$range, 1, 20));
-	var plans = A2(
-		_elm_lang$core$List$repeat,
-		3,
-		{
-			goal: {description: 'Complete agile transformation process.'},
-			strategies: {
-				ctor: '::',
-				_0: {
-					description: 'Deal with cultural issues.',
-					tactics: A2(_elm_lang$core$List$take, 10, tactics)
-				},
-				_1: {
-					ctor: '::',
-					_0: {
-						description: 'Address confidence in TDD',
-						tactics: A2(
-							_elm_lang$core$List$take,
-							10,
-							A2(_elm_lang$core$List$drop, 10, tactics))
-					},
-					_1: {ctor: '[]'}
-				}
-			},
-			tactics: tactics,
-			focusedStrategy: _elm_lang$core$Maybe$Nothing
-		});
-	var partProjects = {
+	var strategies = {
 		ctor: '::',
-		_0: function (ps) {
-			return {
-				avatar: {gender: _DanMeakin$agile_informer$Model$Man, num: 1},
-				background: _DanMeakin$agile_informer$Model$NaturalWhite,
-				name: 'DanFin Transformation',
-				shortDescription: 'Transformation process at DanFin. Hybrid Scrum/XP. Commenced 4th April 2016.',
-				longDescription: 'Longer description of the full details of the transformation process...',
-				status: {
-					ctor: '::',
-					_0: _DanMeakin$agile_informer$Model$Activity(_DanMeakin$agile_informer$Model$Active),
-					_1: {ctor: '[]'}
-				},
-				plan: ps,
-				mailbox: {
-					ctor: '::',
-					_0: {
-						sender: 'Jens Jensen',
-						heading: 'Difficulty adopting TDD in team',
-						message: 'Hey,\n\nWe are really finding it difficult to do TDD in the team. Can you help out? Do you know any good ways to get started?\n\nThanks,\n\nJens',
-						date: function (_p3) {
-							return _elm_lang$core$Date$fromTime(
-								_elm_lang$core$Basics$toFloat(_p3));
-						}(feb5th - (5 * oneDay))
-					},
-					_1: {
-						ctor: '::',
-						_0: {
-							sender: 'Lauren Laird',
-							heading: 'How much XP should we do?',
-							message: 'We don\'t really know what we should be doing from XP. You said we could do things like pair programming, TDD, etc. but we don\'t know what is best. Can you advise? Thanks!',
-							date: function (_p4) {
-								return _elm_lang$core$Date$fromTime(
-									_elm_lang$core$Basics$toFloat(_p4));
-							}(feb5th - (2 * oneDay))
-						},
-						_1: {
-							ctor: '::',
-							_0: {
-								sender: 'Jemma Smith',
-								heading: 'PO is useless...',
-								message: 'Our PO doesn\'t know how to do any refinements or grooming, which is a realy problem now. Our backlog is totally chaotic. Can you help?',
-								date: function (_p5) {
-									return _elm_lang$core$Date$fromTime(
-										_elm_lang$core$Basics$toFloat(_p5));
-								}(feb5th + (17 * oneDay))
-							},
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				showView: _DanMeakin$agile_informer$Model$Tactics
-			};
+		_0: {description: 'Emphasise the Product Owner role.', tactics: productOwnerTactics},
+		_1: {
+			ctor: '::',
+			_0: {description: 'Address confidence in TDD.', tactics: tddTactics},
+			_1: {ctor: '[]'}
+		}
+	};
+	var plan = {
+		goal: {description: 'Complete agile transformation process.'},
+		strategies: strategies,
+		focusedStrategy: _elm_lang$core$Maybe$Nothing
+	};
+	return plan;
+}();
+var _DanMeakin$agile_informer$MockedData$project3 = function () {
+	var mailbox = {
+		ctor: '::',
+		_0: {
+			heading: 'How does XP help us??',
+			message: 'We don\'t even make software wtf?!?!?!',
+			sender: 'Anna Anorak',
+			date: _DanMeakin$agile_informer$MockedData$dayOf2017(41)
+		},
+		_1: {ctor: '[]'}
+	};
+	var project = {
+		name: 'XP Study @ Danske Øl og Vin',
+		shortDescription: 'Investigation into usability of XP within a Danish drinks company. Commenced 10th November 2016; concluded 30th January 2017.',
+		longDescription: 'Longer description of the full details of the transformation process...',
+		avatar: {gender: _DanMeakin$agile_informer$Model$Man, num: 1},
+		background: _DanMeakin$agile_informer$Model$Seigaiha,
+		status: {
+			ctor: '::',
+			_0: _DanMeakin$agile_informer$Model$Activity(_DanMeakin$agile_informer$Model$Concluded),
+			_1: {ctor: '[]'}
+		},
+		plan: _DanMeakin$agile_informer$MockedData$projectPlan,
+		mailbox: mailbox,
+		showView: _DanMeakin$agile_informer$Model$Tactics
+	};
+	return project;
+}();
+var _DanMeakin$agile_informer$MockedData$project2 = function () {
+	var mailbox = {
+		ctor: '::',
+		_0: {
+			heading: 'Problems with requirements',
+			message: 'We keep getting requirements from PMs which they want us to complete separate from the sprints. I think this is a problem..',
+			sender: 'Peter Petersen',
+			date: _DanMeakin$agile_informer$MockedData$dayOf2017(45)
+		},
+		_1: {ctor: '[]'}
+	};
+	var project = {
+		name: 'NorDat Scrum Deployment',
+		shortDescription: 'Deployment of Scrum at NorDat. Commenced 12th January 2017.',
+		longDescription: 'Longer description of the full details of the transformation process...',
+		avatar: {gender: _DanMeakin$agile_informer$Model$Woman, num: 2},
+		background: _DanMeakin$agile_informer$Model$Swirls,
+		status: {
+			ctor: '::',
+			_0: _DanMeakin$agile_informer$Model$Activity(_DanMeakin$agile_informer$Model$Active),
+			_1: {
+				ctor: '::',
+				_0: _DanMeakin$agile_informer$Model$PendingReports,
+				_1: {ctor: '[]'}
+			}
+		},
+		plan: _DanMeakin$agile_informer$MockedData$projectPlan,
+		mailbox: mailbox,
+		showView: _DanMeakin$agile_informer$Model$Tactics
+	};
+	return project;
+}();
+var _DanMeakin$agile_informer$MockedData$project1 = function () {
+	var mailbox = {
+		ctor: '::',
+		_0: {
+			heading: 'Difficulty adopting TDD in team',
+			message: 'Hey,\n\nWe are really finding it difficult to do TDD in the team. Can you help out? Do you know any good ways to get started?\n\nThanks,\n\nJens',
+			sender: 'Jens Jensen',
+			date: _DanMeakin$agile_informer$MockedData$dayOf2017(30)
 		},
 		_1: {
 			ctor: '::',
-			_0: function (ps) {
-				return {
-					avatar: {gender: _DanMeakin$agile_informer$Model$Woman, num: 2},
-					background: _DanMeakin$agile_informer$Model$Swirls,
-					name: 'NorDat Scrum Deployment',
-					shortDescription: 'Deployment of Scrum at NorDat. Commenced 12th January 2017.',
-					longDescription: 'Longer description of the full details of the transformation process...',
-					status: {
-						ctor: '::',
-						_0: _DanMeakin$agile_informer$Model$Activity(_DanMeakin$agile_informer$Model$Active),
-						_1: {
-							ctor: '::',
-							_0: _DanMeakin$agile_informer$Model$PendingReports,
-							_1: {ctor: '[]'}
-						}
-					},
-					plan: ps,
-					mailbox: {
-						ctor: '::',
-						_0: {
-							sender: 'Peter Petersen',
-							heading: 'Problems with requirements',
-							message: 'We keep getting requirements from PMs which they want us to complete separate from the sprints.',
-							date: function (_p6) {
-								return _elm_lang$core$Date$fromTime(
-									_elm_lang$core$Basics$toFloat(_p6));
-							}(feb5th + (10 * oneDay))
-						},
-						_1: {ctor: '[]'}
-					},
-					showView: _DanMeakin$agile_informer$Model$Tactics
-				};
+			_0: {
+				heading: 'How much XP should we do?',
+				message: 'We don\'t really know what we should be doing from XP. You said we could do things like pair programming, TDD, etc. but we don\'t know what is best. Can you advise? Thanks!',
+				sender: 'Lauren Laird',
+				date: _DanMeakin$agile_informer$MockedData$dayOf2017(33)
 			},
 			_1: {
 				ctor: '::',
-				_0: function (ps) {
-					return {
-						avatar: {gender: _DanMeakin$agile_informer$Model$Woman, num: 3},
-						background: _DanMeakin$agile_informer$Model$Seigaiha,
-						name: 'XP Study @ Danske Øl og Vin',
-						shortDescription: 'Investigation into usability of XP within a Danish drinks company. Commenced 10th November 2016; concluded 30th January 2017.',
-						longDescription: 'Longer description of the full details of the transformation process...',
-						status: {
-							ctor: '::',
-							_0: _DanMeakin$agile_informer$Model$Activity(_DanMeakin$agile_informer$Model$Concluded),
-							_1: {ctor: '[]'}
-						},
-						plan: ps,
-						mailbox: {
-							ctor: '::',
-							_0: {
-								sender: 'Anna Anorak',
-								heading: 'How does XP help us??',
-								message: 'We don\'t even make software wtf?!?!?!',
-								date: function (_p7) {
-									return _elm_lang$core$Date$fromTime(
-										_elm_lang$core$Basics$toFloat(_p7));
-								}(feb5th + (13 * oneDay))
-							},
-							_1: {ctor: '[]'}
-						},
-						showView: _DanMeakin$agile_informer$Model$Tactics
-					};
+				_0: {
+					heading: 'PO is useless...',
+					message: 'Our PO doesn\'t know how to do any refinements or grooming, which is a real problem now. Our backlog is totally chaotic. Can you help?',
+					sender: 'Jemma Smith',
+					date: _DanMeakin$agile_informer$MockedData$dayOf2017(55)
 				},
 				_1: {ctor: '[]'}
 			}
 		}
 	};
-	var projects = A3(
-		_elm_lang$core$List$map2,
-		F2(
-			function (proj, plan) {
-				return proj(plan);
-			}),
-		partProjects,
-		plans);
+	var project = {
+		name: 'DanFin Transformation',
+		shortDescription: 'Transformation process at DanFin. Hybrid Scrum/XP. Commenced 4th April 2016.',
+		longDescription: 'Longer description of the full details of the transformation process...',
+		avatar: {gender: _DanMeakin$agile_informer$Model$Man, num: 1},
+		background: _DanMeakin$agile_informer$Model$NaturalWhite,
+		status: {
+			ctor: '::',
+			_0: _DanMeakin$agile_informer$Model$Activity(_DanMeakin$agile_informer$Model$Active),
+			_1: {ctor: '[]'}
+		},
+		plan: _DanMeakin$agile_informer$MockedData$projectPlan,
+		mailbox: mailbox,
+		showView: _DanMeakin$agile_informer$Model$Tactics
+	};
+	return project;
+}();
+var _DanMeakin$agile_informer$MockedData$data = function (date) {
+	var projects = {
+		ctor: '::',
+		_0: _DanMeakin$agile_informer$MockedData$project1,
+		_1: {
+			ctor: '::',
+			_0: _DanMeakin$agile_informer$MockedData$project2,
+			_1: {
+				ctor: '::',
+				_0: _DanMeakin$agile_informer$MockedData$project3,
+				_1: {ctor: '[]'}
+			}
+		}
+	};
 	return {projects: projects, focusedProject: _elm_lang$core$Maybe$Nothing, currentDate: date};
 };
 
@@ -9611,9 +9622,9 @@ var _DanMeakin$agile_informer$View$mailboxView = F2(
 var _DanMeakin$agile_informer$View$tacticsView = F2(
 	function (today, project) {
 		var label = function (t) {
-			var _p3 = t.success;
-			if (_p3.ctor === 'Just') {
-				if (_p3._0.ctor === 'Successful') {
+			var _p3 = t.completion;
+			switch (_p3.ctor) {
+				case 'Successful':
 					return A2(
 						_elm_lang$html$Html$div,
 						{
@@ -9626,7 +9637,7 @@ var _DanMeakin$agile_informer$View$tacticsView = F2(
 							_0: _elm_lang$html$Html$text('Successful'),
 							_1: {ctor: '[]'}
 						});
-				} else {
+				case 'Unsuccessful':
 					return A2(
 						_elm_lang$html$Html$div,
 						{
@@ -9639,91 +9650,90 @@ var _DanMeakin$agile_informer$View$tacticsView = F2(
 							_0: _elm_lang$html$Html$text('Unsuccessful'),
 							_1: {ctor: '[]'}
 						});
-				}
-			} else {
-				var _p4 = t.completionDate;
-				if (_p4.ctor === 'Just') {
-					var _p5 = _p4._0;
-					if (_elm_lang$core$Native_Utils.cmp(
-						_elm_lang$core$Date$toTime(_p5),
-						_elm_lang$core$Date$toTime(today)) < 0) {
-						return A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('label alert'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Overdue'),
-								_1: {ctor: '[]'}
-							});
-					} else {
-						var dateString = A2(
-							_elm_lang$core$String$join,
-							' ',
-							{
-								ctor: '::',
-								_0: _elm_lang$core$Basics$toString(
-									_elm_lang$core$Date$dayOfWeek(_p5)),
-								_1: {
+				default:
+					var _p4 = t.completionDate;
+					if (_p4.ctor === 'Just') {
+						var _p5 = _p4._0;
+						if (_elm_lang$core$Native_Utils.cmp(
+							_elm_lang$core$Date$toTime(_p5),
+							_elm_lang$core$Date$toTime(today)) < 0) {
+							return A2(
+								_elm_lang$html$Html$div,
+								{
 									ctor: '::',
-									_0: ' ',
+									_0: _elm_lang$html$Html_Attributes$class('label alert'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Overdue'),
+									_1: {ctor: '[]'}
+								});
+						} else {
+							var dateString = A2(
+								_elm_lang$core$String$join,
+								' ',
+								{
+									ctor: '::',
+									_0: _elm_lang$core$Basics$toString(
+										_elm_lang$core$Date$dayOfWeek(_p5)),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$core$Basics$toString(
-											_elm_lang$core$Date$day(_p5)),
+										_0: ' ',
 										_1: {
 											ctor: '::',
-											_0: ' ',
+											_0: _elm_lang$core$Basics$toString(
+												_elm_lang$core$Date$day(_p5)),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$core$Basics$toString(
-													_elm_lang$core$Date$month(_p5)),
+												_0: ' ',
 												_1: {
 													ctor: '::',
-													_0: ' ',
+													_0: _elm_lang$core$Basics$toString(
+														_elm_lang$core$Date$month(_p5)),
 													_1: {
 														ctor: '::',
-														_0: _elm_lang$core$Basics$toString(
-															_elm_lang$core$Date$year(_p5)),
-														_1: {ctor: '[]'}
+														_0: ' ',
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$core$Basics$toString(
+																_elm_lang$core$Date$year(_p5)),
+															_1: {ctor: '[]'}
+														}
 													}
 												}
 											}
 										}
 									}
-								}
-							});
+								});
+							return A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('label primary'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(_elm_lang$core$Basics_ops['++'], 'Due: ', dateString)),
+									_1: {ctor: '[]'}
+								});
+						}
+					} else {
 						return A2(
 							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('label primary'),
+								_0: _elm_lang$html$Html_Attributes$class('label secondary'),
 								_1: {ctor: '[]'}
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(
-									A2(_elm_lang$core$Basics_ops['++'], 'Due: ', dateString)),
+								_0: _elm_lang$html$Html$text('On hold'),
 								_1: {ctor: '[]'}
 							});
 					}
-				} else {
-					return A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('label secondary'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('On hold'),
-							_1: {ctor: '[]'}
-						});
-				}
 			}
 		};
 		var tacticCard = function (t) {
@@ -9849,7 +9859,7 @@ var _DanMeakin$agile_informer$View$tacticsView = F2(
 					});
 			});
 		var complete = function (t) {
-			return !_elm_lang$core$Native_Utils.eq(t.success, _elm_lang$core$Maybe$Nothing);
+			return !_elm_lang$core$Native_Utils.eq(t.completion, _DanMeakin$agile_informer$Model$Incomplete);
 		};
 		var awaitingAssessment = function (t) {
 			var _p6 = t.completionDate;
@@ -9858,7 +9868,7 @@ var _DanMeakin$agile_informer$View$tacticsView = F2(
 			} else {
 				return (_elm_lang$core$Native_Utils.cmp(
 					_elm_lang$core$Date$toTime(_p6._0),
-					_elm_lang$core$Date$toTime(today)) < 1) && _elm_lang$core$Native_Utils.eq(t.success, _elm_lang$core$Maybe$Nothing);
+					_elm_lang$core$Date$toTime(today)) < 1) && _elm_lang$core$Native_Utils.eq(t.completion, _DanMeakin$agile_informer$Model$Incomplete);
 			}
 		};
 		var futureCompletionDate = function (t) {
@@ -9872,14 +9882,14 @@ var _DanMeakin$agile_informer$View$tacticsView = F2(
 			}
 		};
 		var noCompletionDate = function (t) {
-			return _elm_lang$core$Native_Utils.eq(t.completionDate, _elm_lang$core$Maybe$Nothing) && _elm_lang$core$Native_Utils.eq(t.success, _elm_lang$core$Maybe$Nothing);
+			return _elm_lang$core$Native_Utils.eq(t.completionDate, _elm_lang$core$Maybe$Nothing) && _elm_lang$core$Native_Utils.eq(t.completion, _DanMeakin$agile_informer$Model$Incomplete);
 		};
 		var allTactics = function () {
 			var _p8 = project.plan.focusedStrategy;
 			if (_p8.ctor === 'Just') {
 				return _p8._0.tactics;
 			} else {
-				return project.plan.tactics;
+				return _DanMeakin$agile_informer$Model$tactics(project);
 			}
 		}();
 		var tacticsNoDate = A2(_elm_lang$core$List$filter, noCompletionDate, allTactics);
@@ -10497,7 +10507,7 @@ var _DanMeakin$agile_informer$Main$subscriptions = function (model) {
 };
 var _DanMeakin$agile_informer$Main$init = A2(
 	_elm_lang$core$Platform_Cmd_ops['!'],
-	_DanMeakin$agile_informer$Model$mockedModel(
+	_DanMeakin$agile_informer$MockedData$data(
 		_elm_lang$core$Date$fromTime(1)),
 	{ctor: '[]'});
 var _DanMeakin$agile_informer$Main$main = _elm_lang$html$Html$program(

@@ -4,6 +4,7 @@ import Date exposing (fromTime)
 import Html
 import Time
 
+import MockedData
 import Model  exposing (..)
 import View   exposing (..)
 import Update exposing (..)
@@ -18,7 +19,7 @@ main =
 
 init : (Model, Cmd Msg)
 init =
-  mockedModel (fromTime 1)
+  MockedData.data (fromTime 1)
     ! []
 
 subscriptions : Model -> Sub Msg

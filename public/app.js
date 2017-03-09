@@ -151,6 +151,10 @@ require.register("src/elm/Main.elm", function(exports, require, module) {
 
 });
 
+;require.register("src/elm/MockedData.elm", function(exports, require, module) {
+
+});
+
 ;require.register("src/elm/Model.elm", function(exports, require, module) {
 
 });

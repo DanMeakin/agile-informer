@@ -125,10 +125,10 @@ tacticsView today project =
             strat.tactics
             
           Nothing ->
-            project.plan.tactics
+            tactics project
 
       noCompletionDate t =
-        t.completionDate == Nothing && t.success == Nothing
+        t.completionDate == Nothing && t.completion == Incomplete
 
       futureCompletionDate t =
         case t.completionDate of
@@ -144,10 +144,10 @@ tacticsView today project =
             False
 
           Just d ->
-            toTime d <= toTime today && t.success == Nothing
+            toTime d <= toTime today && t.completion == Incomplete
 
       complete t =
-        t.success /= Nothing
+        t.completion /= Incomplete
 
       tacticsNoDate =
         List.filter noCompletionDate allTactics
@@ -162,14 +162,14 @@ tacticsView today project =
         List.filter complete allTactics
 
       label t =
-        case t.success of
-          Just Successful ->
+        case t.completion of
+          Successful ->
             div [ class "label success" ] [ text "Successful" ]
 
-          Just Unsuccessful ->
+          Unsuccessful ->
             div [ class "label warning" ] [ text "Unsuccessful" ]
 
-          Nothing ->
+          Incomplete ->
             case t.completionDate of
               Just d ->
                 if toTime d < toTime today
