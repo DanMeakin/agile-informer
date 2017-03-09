@@ -232,7 +232,7 @@ tacticsView today project =
         , div [ class "small-3 columns" ]
             [ tacticColumn "Ongoing" tacticsOngoing ]
         , div [ class "small-3 columns" ]
-            [ tacticColumn "To be assessed" tacticsAwaitingAssessment ]
+            [ tacticColumn "Overdue" tacticsAwaitingAssessment ]
         , div [ class "small-3 columns" ]
             [ tacticColumn "Complete" tacticsComplete ]
         ]
@@ -289,7 +289,8 @@ mailboxView today project =
   in 
       div []
         [ div [ class "row" ]
-            <| (h3 [] [ text "Mailbox" ])
+            <| (div [ class "small-12 columns" ] 
+                  [ h3 [ class "mailbox-header" ] [ text "Mailbox" ] ])
                  ::(List.map mailMessage project.mailbox)
         ]
 

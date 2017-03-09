@@ -14,7 +14,7 @@
      * 3. Prevent adjustments of font size after orientation changes in
      *    IE on Windows Phone and in iOS.
      */
-@import url("https://fonts.googleapis.com/css?family=Bungee+Shade|Source+Sans+Pro:400,700|Vampiro+One");
+@import url("https://fonts.googleapis.com/css?family=Bungee+Shade|Share:400,700|Source+Sans+Pro:400,700|Vampiro+One");
 html {
   font-family: sans-serif;
   /* 1 */
@@ -4565,7 +4565,10 @@ body {
     padding-bottom: 1.5rem; }
 
 .project-title h1 {
-  color: white; }
+  color: white;
+  font-family: 'Share', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase; }
 
 #sidebar {
   background-image: url("images/header-texture.png");
@@ -4573,19 +4576,28 @@ body {
   height: 100%;
   padding-bottom: 10rem; }
 
+.tactic-header, .mailbox-header {
+  font-family: 'Share', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: black; }
+
 .goal {
   padding-bottom: 1rem;
   color: yellow; }
   .goal h4 {
-    font-family: 'Bungee Shade', cursive;
-    color: yellow; }
+    font-family: 'Share', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0; }
 
 .strategy {
-  padding-bottom: 0.5rem; }
+  padding-bottom: 1rem; }
   .strategy h5 {
-    font-family: 'Vampiro One', cursive;
-    transform: rotate(-10deg);
-    padding-bottom: 0.5rem; }
+    font-family: 'Share', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0; }
   .strategy:hover {
     background-color: rgba(255, 255, 0, 0.1);
     cursor: pointer; }
@@ -4597,7 +4609,7 @@ body {
   cursor: pointer;
   padding-bottom: 1rem; }
 
-.tactics-columns {
+.tactics-columns, .mailbox-header {
   padding-top: 1rem; }
 
 .spacer {

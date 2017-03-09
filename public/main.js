@@ -9860,11 +9860,26 @@ var _DanMeakin$agile_informer$View$mailboxView = F2(
 					{
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$h3,
-							{ctor: '[]'},
+							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('Mailbox'),
+								_0: _elm_lang$html$Html_Attributes$class('small-12 columns'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$h3,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('mailbox-header'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Mailbox'),
+										_1: {ctor: '[]'}
+									}),
 								_1: {ctor: '[]'}
 							}),
 						_1: A2(_elm_lang$core$List$map, mailMessage, project.mailbox)
@@ -10203,7 +10218,7 @@ var _DanMeakin$agile_informer$View$tacticsView = F2(
 							},
 							{
 								ctor: '::',
-								_0: A2(tacticColumn, 'To be assessed', tacticsAwaitingAssessment),
+								_0: A2(tacticColumn, 'Overdue', tacticsAwaitingAssessment),
 								_1: {ctor: '[]'}
 							}),
 						_1: {

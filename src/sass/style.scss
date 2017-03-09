@@ -7,7 +7,7 @@
 @include foundation-flex-grid;
 
 // Logo fonts
-@import url('https://fonts.googleapis.com/css?family=Bungee+Shade|Source+Sans+Pro:400,700|Vampiro+One');
+@import url('https://fonts.googleapis.com/css?family=Bungee+Shade|Share:400,700|Source+Sans+Pro:400,700|Vampiro+One');
 
 html, body {
   height: 100%;
@@ -102,6 +102,12 @@ body {
   font-family: 'Vampiro One', cursive; //'Monoton', cursive;
 }
 
+@mixin header-font() {
+  font-family: 'Share', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 #main-logo {
   display: table;
   width: 26rem;
@@ -158,6 +164,7 @@ body {
 
 .project-title h1 {
   color: white;
+  @include header-font;
 }
 
 #sidebar {
@@ -167,22 +174,27 @@ body {
   padding-bottom: 10rem;
 }
 
+.tactic-header, .mailbox-header {
+  @include header-font;
+  color: black;
+}
+
 .goal {
   padding-bottom: 1rem;
   color: yellow;
 
   h4 {
-    @include logo-font;
+    @include header-font;
+    margin-bottom: 0;
   }
 }
 
 .strategy {
-  padding-bottom: 0.5rem;
+  padding-bottom: 1rem;
 
   h5 {
-    @include logo-secondary-font;
-    transform: rotate(-10deg);
-    padding-bottom: 0.5rem;
+    @include header-font;
+    margin-bottom: 0;
   }
 
   &:hover {
@@ -201,7 +213,7 @@ body {
   padding-bottom: 1rem;
 }
 
-.tactics-columns {
+.tactics-columns, .mailbox-header {
   padding-top: 1rem;
 }
 
